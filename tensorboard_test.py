@@ -70,7 +70,6 @@ def train():
 	train = np.zeros((n, 2))
 	train[:,0] = (Up == 0)
 	train[:,1] = (Up == 1)
-	train[:,1] = (Up == 1)
 	cutoff = int(np.floor(n*0.8))
 	Y_train = train[:cutoff,:]
 	Y_test = train[cutoff:,:]
@@ -110,18 +109,11 @@ def train():
 	Antall_handler_all = normalize(Antall_handler_all, Antall_handler)
 	Valutakurs_all = normalize(Valutakurs_all, Valutakurs)
 
-	#plt.plot(Siste_all[cutoff:])
-	#plt.show()
 
 	X_data = Siste_all
 	X_data = np.append(X_data,Omsatte_all, 1)
 	X_data = np.append(X_data,Antall_handler_all, 1)
 	X_data= np.append(X_data,Valutakurs_all, 1)
-
-
-	#plt.plot(X_data[days_history:])
-	#plt.show()
-	#print(X_data.shape)
 
 	X_train = X_data[:cutoff,:]
 	X_test = X_data[cutoff:,:]
@@ -269,10 +261,6 @@ if __name__ == '__main__':
 					help='Number of steps to run trainer.')
 	parser.add_argument('--learning_rate', type=float, default=0.001,
 					help='Initial learning rate')
-	parser.add_argument('--dropout', type=float, default=0.9,
-					help='Keep probability for training dropout.')
-	parser.add_argument('--data_dir', type=str, default='/tmp/tensorflow/mnist/input_data',
-					help='Directory for storing input data')
 	parser.add_argument('--log_dir', type=str, default='/tmp/tensorflow/mnist/logs/mnist_with_summaries',
 					help='Summaries log directory')
 	FLAGS, unparsed = parser.parse_known_args()
